@@ -40,7 +40,9 @@ export class State extends Schema {
         if (position.y) {
             this.players.get(sessionId).y = position.y;
         }
-        // **
+
+        // ** DOP
+        // обращаюсь к добавленным переменным в Player в Unity, и записываю в них значения с сервера
         if (position.h){
             this.players.get(sessionId).h = position.h;
         }
@@ -48,7 +50,6 @@ export class State extends Schema {
         if (position.v){
             this.players.get(sessionId).v = position.v;
         }
-
         // **
     }
 }
