@@ -14,7 +14,7 @@ using UnityEngine;
 // Вообщем не работает.
 
 
-
+// Как клиенту дать понять, что сервер не отвечвет (лаги)? С колизиусом.
 
 
 public class EnemyController : MonoBehaviour
@@ -35,7 +35,7 @@ public class EnemyController : MonoBehaviour
 
         _lastPosition = position;
 
-
+        MultiplayerManager.Instance.
         foreach (var dataChange in changes) {
             switch (dataChange.Field) {
                 case "x":
