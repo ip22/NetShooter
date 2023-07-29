@@ -35,7 +35,6 @@ public class EnemyController : MonoBehaviour
 
         _lastPosition = position;
 
-        MultiplayerManager.Instance.
         foreach (var dataChange in changes) {
             switch (dataChange.Field) {
                 case "x":
