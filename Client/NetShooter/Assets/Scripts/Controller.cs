@@ -21,7 +21,8 @@ public class Controller : MonoBehaviour
             {"x", position.x},
             {"y", position.z},
             
-            // **
+            // ** DOP
+            // добавил в словарь данные
             {"h", h},
             {"v", v}
             // **

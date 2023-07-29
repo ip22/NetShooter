@@ -1,6 +1,5 @@
 using Colyseus;
 using UnityEngine;
-using System;
 using System.Collections.Generic;
 
 public class MultiplayerManager : ColyseusManager<MultiplayerManager>
@@ -57,10 +56,10 @@ public class MultiplayerManager : ColyseusManager<MultiplayerManager>
     protected override void OnDestroy() {
         base.OnDestroy();
 
-        _room?.Leave();
+        _room.Leave();
     }
 
     public void SendMessage(string key, Dictionary<string, object> data) {
-        _room?.Send(key, data);
+        _room.Send(key, data);
     }
 }

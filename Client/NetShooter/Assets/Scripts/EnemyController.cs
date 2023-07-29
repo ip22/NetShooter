@@ -1,21 +1,33 @@
 using Colyseus.Schema;
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Scripting.APIUpdating;
-using UnityEngine.Windows;
+
+// «адумка была такой.
+// ¬ысчитываетс€ направление движени€ енеми.
+// ¬ моменты когда лагает он продолжает двигатьс€ в этом направлении.
+// ѕотом через лерп синхронизирутс€ с верным положением.
+
+// ƒоп. задание отмечено - DOP
+
+
+
+// ¬ообщем не работает.
+
+
+
+
 
 public class EnemyController : MonoBehaviour
 {
-    // **
-    [SerializeField] private EnemyCharacter _enemyCharacter;
-
+    // ** DOP
+    // дополнительные пол€
     private Vector3 _lastPosition;
+    private Vector3 _newPosition;
     private Vector2 _input;
 
     private Vector3 _direction;
 
-    private bool _isStoped;
+    private bool _isMoved;
     // **
 
     internal void OnChange(List<DataChange> changes) {
@@ -42,11 +54,15 @@ public class EnemyController : MonoBehaviour
                     break;
             }
         }
-        
-        // **
+
+        // ** DOP
+        // направление от фактической позиции до позиции в полученных от сервера значени€х x и y
         _direction = (position - _lastPosition).normalized;
 
-        _isStoped = _input.x == 0 && _input.y == 0;
+        // проверка полученных от сервера значений интпута, если они не равны 0, значит енеми двигаетс€
+        _isMoved = _input.x != 0 && _input.x != 0;
+
+        _newPosition = position;
         // **
 
         //transform.position = position;
@@ -54,21 +70,22 @@ public class EnemyController : MonoBehaviour
 
     public void Update() {
 
-        // **
-        if (_isStoped) AllegedMove();
+        // ** DOP
+        // если енеми двигаетс€, двигать его в предположительную сторону
+        // _isMoved - в теории это какой-то bool от сервера что нет с ним св€зи
+        if (_isMoved) AllegedMove();
+        else SyncPosition();
         // **
 
     }
 
-    // **
+    // ** DOP
     private void AllegedMove() {
-        ////transform.position += _direction * 2 * Time.deltaTime;
-
-
         transform.Translate(_direction.normalized * Time.deltaTime * 2, Space.World);
+    }
 
-        //var direction = new Vector3(_direction.x, 0, _direction.y).normalized;
-        //transform.position += direction * 2 * Time.deltaTime;
+    public void SyncPosition() {
+        transform.position = Vector3.Lerp(transform.position, _newPosition, Time.deltaTime * 20);
     }
     // **
 }

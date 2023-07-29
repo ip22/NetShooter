@@ -21,7 +21,7 @@ public class Example : MonoBehaviour
             /* ...   */
         };
 
-        StartRun(_url, с”цес, /* безим€нный метод */(s) => { Debug.Log(s); });
+        StartRun(_url, с”цес, /* безым€нный метод */(s) => { Debug.Log(s); });
     }
 
     public void StartRun(string url, Action<string> callback, Action<string> error = null) => StartCoroutine(Run(url, callback, error));
