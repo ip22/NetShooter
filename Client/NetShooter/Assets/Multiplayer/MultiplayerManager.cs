@@ -36,13 +36,13 @@ public class MultiplayerManager : ColyseusManager<MultiplayerManager>
     }
 
     private void CreatePlayer(Player player) {
-        var position = new Vector3(player.x, 0, player.y);
+        var position = new Vector3(player.pX, player.pY, player.pZ);
 
         Instantiate(_playerInUnity, position, Quaternion.identity);
     }
 
     private void CreateEnemy(string key, Player player) {
-        var position = new Vector3(player.x, 0, player.y);
+        var position = new Vector3(player.pX, player.pY, player.pZ);
 
         var enemy = Instantiate(_enemy, position, Quaternion.identity);
 
