@@ -7,14 +7,6 @@ export class Player extends Schema {
 
     @type("number")
     y = Math.floor(Math.random() * 50) - 25;
-
-    // **
-    @type("number")
-    h = 0;
-
-    @type("number")
-    v = 0;
-    // **
 }
 
 export class State extends Schema {
@@ -40,17 +32,6 @@ export class State extends Schema {
         if (position.y) {
             this.players.get(sessionId).y = position.y;
         }
-
-        // ** DOP
-        // обращаюсь к добавленным переменным в Player в Unity, и записываю в них значения с сервера
-        if (position.h){
-            this.players.get(sessionId).h = position.h;
-        }
-
-        if (position.v){
-            this.players.get(sessionId).v = position.v;
-        }
-        // **
     }
 }
 

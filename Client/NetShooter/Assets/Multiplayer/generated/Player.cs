@@ -13,14 +13,5 @@ public partial class Player : Schema {
 
 	[Type(1, "number")]
 	public float y = default(float);
-
-    // ** DOP
-    // добавил две переменные для пересылки серверу
-    [Type(2, "number")]
-    public float h = default(float);
-
-    [Type(3, "number")]
-    public float v = default(float);
-    //**
 }
 

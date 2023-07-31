@@ -11,22 +11,15 @@ public class Controller : MonoBehaviour
 
         _player.SetInputs(h, v);
 
-        SendMove(h, v);
+        SendMove();
     }
 
-    private void SendMove(float h, float v) {
+    private void SendMove() {
         _player.GetMoveInfo(out Vector3 position);
 
         Dictionary<string, object> data = new Dictionary<string, object>() {
             {"x", position.x},
-            {"y", position.z},
-            
-            // ** DOP
-            // добавил в словарь данные
-            {"h", h},
-            {"v", v}
-            // **
-
+            {"y", position.z}
         };
 
         MultiplayerManager.Instance.SendMessage("move", data);
