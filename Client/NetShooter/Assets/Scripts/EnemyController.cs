@@ -4,10 +4,35 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-    internal void OnChange(List<DataChange> changes) {
-        Vector3 position = transform.position;
-        Vector3 velocity = Vector3.zero;
+    [SerializeField] private EnemyCharacter _enemyCharacter;
+    private List<float> _recievedTimeIntervals = new List<float>() { 0f, 0f, 0f, 0f, 0f };
+    private float AvarageInterval {
+        get {
+            int recievedTimeIntervalsCount = _recievedTimeIntervals.Count;
+            var sum = 0f;
 
+            for (int i = 0; i < recievedTimeIntervalsCount; i++) {
+                sum += _recievedTimeIntervals[i];
+            }
+            return sum / recievedTimeIntervalsCount;
+        }
+    }
+
+    private float _lastRecievedTime = 0f;
+
+    private void SaveRecievedTime() {
+        var interval = Time.time - _lastRecievedTime;
+        _lastRecievedTime = Time.time;
+
+        _recievedTimeIntervals.Add(interval);
+        _recievedTimeIntervals.Remove(0);
+    }
+
+    internal void OnChange(List<DataChange> changes) {
+        SaveRecievedTime();
+
+        var position = _enemyCharacter.TargetPosition;
+        var velocity = Vector3.zero;
 
         foreach (var dataChange in changes) {
             switch (dataChange.Field) {
@@ -34,6 +59,6 @@ public class EnemyController : MonoBehaviour
             }
         }
 
-        transform.position = position;
+        _enemyCharacter.SetMovement(position, velocity, AvarageInterval);
     }
 }

@@ -6,7 +6,7 @@ export class Player extends Schema {
     pX = Math.floor(Math.random() * 50) - 25;
 
     @type("number")
-    pY = Math.floor(Math.random() * 50) - 25;
+    pY = 0;
 
     @type("number")
     pZ = Math.floor(Math.random() * 50) - 25;
