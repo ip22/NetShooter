@@ -1,24 +1,27 @@
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class PlayerCharacter : MonoBehaviour
+public class PlayerCharacter : Character
 {
     [SerializeField] private Rigidbody _rigidbody;
-
-    [SerializeField] private float _speed = 2f;
-
-    [SerializeField] private Transform _head;
-
-    [SerializeField] private Transform _cameraPoint;
-    [SerializeField] private float _maxHeadAngle = 90;
-    [SerializeField] private float _minHeadAngle = -90;
+    //[SerializeField] private float _speed = 2f;
 
     [SerializeField] private float _jumpForce = 5f;
+    [SerializeField] private CheckFly _checkFly;
+    [SerializeField] private float _jumpDelay = .2f;
+
+    [SerializeField] private Transform _head;
+    [SerializeField] private Transform _cameraPoint;
+
+    [SerializeField] private float _maxHeadAngle = 90;
+    [SerializeField] private float _minHeadAngle = -90;
 
     private float _inputH;
     private float _inputV;
     private float _rotateY;
     private float _currentRotateX;
+
+    private float _jumpTime;
 
     private void Start() {
         var camera = Camera.main.transform;
@@ -39,9 +42,11 @@ public class PlayerCharacter : MonoBehaviour
     }
 
     void Move() {
-        Vector3 velocity = (transform.forward * _inputV + transform.right * _inputH).normalized * _speed;
+        Vector3 velocity = (transform.forward * _inputV + transform.right * _inputH).normalized * speed;
         velocity.y = _rigidbody.velocity.y;
-        _rigidbody.velocity = velocity;
+        base.velocity = velocity;
+
+        _rigidbody.velocity = base.velocity;
     }
 
     private void RotateY() {
@@ -59,18 +64,10 @@ public class PlayerCharacter : MonoBehaviour
         velocity = _rigidbody.velocity;
     }
 
-    private bool _isFly = true;
-
-    private void OnCollisionStay(Collision collision) {
-        var contactPoints = collision.contacts;
-        for (int i = 0; i < contactPoints.Length; i++) {
-            if (contactPoints[i].normal.y >.45f)_isFly = false;
-        }
-        _isFly = false;
-    }
-
     public void Jump() {
-        if (_isFly) return;
+        if (_checkFly.IsFly) return;
+        if (Time.time - _jumpTime < _jumpDelay) return;
+        _jumpTime = Time.time;
         _rigidbody.AddForce(0f, _jumpForce, 0f, ForceMode.VelocityChange);
     }
 }
