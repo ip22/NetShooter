@@ -17,8 +17,19 @@ public class EnemyController : MonoBehaviour
             return sum / recievedTimeIntervalsCount;
         }
     }
-
     private float _lastRecievedTime = 0f;
+    private Player _player;
+
+    public void Init(Player player) {
+        this._player = player;
+        _enemyCharacter.SetSpeed(player.speed);
+        player.OnChange += OnChange;
+    }
+
+    public void Destroy() {
+        _player.OnChange -= OnChange;
+        Destroy(gameObject);
+    }
 
     private void SaveRecievedTime() {
         var interval = Time.time - _lastRecievedTime;
@@ -31,8 +42,8 @@ public class EnemyController : MonoBehaviour
     internal void OnChange(List<DataChange> changes) {
         SaveRecievedTime();
 
-        var position = _enemyCharacter.TargetPosition;
-        var velocity = Vector3.zero;
+        var position = transform.position;
+        var velocity = _enemyCharacter.velocity;
 
         foreach (var dataChange in changes) {
             switch (dataChange.Field) {
@@ -54,7 +65,14 @@ public class EnemyController : MonoBehaviour
                 case "vZ":
                     velocity.z = (float)dataChange.Value;
                     break;
+                case "rX":
+                    _enemyCharacter.SetRotateX((float)dataChange.Value);
+                    break;
+                case "rY":
+                    _enemyCharacter.SetRotateY((float)dataChange.Value);
+                    break;
                 default:
+                    Debug.LogWarning("Can't processed changing of field " + dataChange.Field);
                     break;
             }
         }
