@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2938142761972860126
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8975557049349390949}
+  m_Layer: 0
+  m_Name: BulletPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8975557049349390949
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2938142761972860126}
+  m_LocalRotation: {x: 0.70710677, y: -0, z: -0, w: 0.7071069}
+  m_LocalPosition: {x: 0.264, y: -1.431, z: 0.02}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6211986713691060218}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &6099775902548740059
 GameObject:
   m_ObjectHideFlags: 0
@@ -15,6 +46,8 @@ GameObject:
   - component: {fileID: 3514976298099659669}
   - component: {fileID: 3642086834576253232}
   - component: {fileID: 6811115325511234162}
+  - component: {fileID: 975897512624409732}
+  - component: {fileID: 3862531907033309311}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -51,6 +84,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 1865419308828223901}
+  _gun: {fileID: 975897512624409732}
   _mouseSensetivity: 2
 --- !u!114 &1865419308828223901
 MonoBehaviour:
@@ -155,6 +189,39 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &975897512624409732
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6099775902548740059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e46375127c741ed48aec4533223b935d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bulletPrefab: {fileID: 5459323238758896828, guid: ac3842854c21ed54b91f239fe53fe55a,
+    type: 3}
+  _bulletPoint: {fileID: 8975557049349390949}
+  _bulletSpeed: 10
+  _shootDelay: 0.2
+--- !u!114 &3862531907033309311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6099775902548740059}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d47c16f240169f04fb478cf004690426, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _bulletPrefab: {fileID: 5459323238758896828, guid: ac3842854c21ed54b91f239fe53fe55a,
+    type: 3}
+  _gun: {fileID: 975897512624409732}
+  _animator: {fileID: 6591224479423319456}
 --- !u!1 &8855253431464270449
 GameObject:
   m_ObjectHideFlags: 0
@@ -281,11 +348,19 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 3819721071578962350}
+    - targetCorrespondingSourceObject: {fileID: 6128295628213254845, guid: 5b9e5150db7b2204d98b5f69a683d1e6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8975557049349390949}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 5773215855315535954, guid: 5b9e5150db7b2204d98b5f69a683d1e6,
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 64371750339679360}
+    - targetCorrespondingSourceObject: {fileID: 4874820608474953760, guid: 5b9e5150db7b2204d98b5f69a683d1e6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6591224479423319456}
   m_SourcePrefab: {fileID: 100100000, guid: 5b9e5150db7b2204d98b5f69a683d1e6, type: 3}
 --- !u!4 &4391732783407871353 stripped
 Transform:
@@ -293,6 +368,33 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 232354739088166215}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &4656628438149215591 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4874820608474953760, guid: 5b9e5150db7b2204d98b5f69a683d1e6,
+    type: 3}
+  m_PrefabInstance: {fileID: 232354739088166215}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6591224479423319456
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4656628438149215591}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: b71999742ae9cab4c9ff7407bd233548, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &5992013315344614677 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5773215855315535954, guid: 5b9e5150db7b2204d98b5f69a683d1e6,

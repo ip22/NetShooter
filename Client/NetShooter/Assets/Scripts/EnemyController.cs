@@ -5,6 +5,8 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField] private EnemyCharacter _enemyCharacter;
+    [SerializeField] private EnemyGun _gun;
+
     private List<float> _recievedTimeIntervals = new List<float>() { 0f, 0f, 0f, 0f, 0f };
     private float AvarageInterval {
         get {
@@ -24,6 +26,13 @@ public class EnemyController : MonoBehaviour
         this._player = player;
         _enemyCharacter.SetSpeed(player.speed);
         player.OnChange += OnChange;
+    }
+
+    public void Shoot(in ShootInfo info) {
+        Vector3 position = new Vector3(info.pX, info.pY, info.pZ);
+        Vector3 velocity = new Vector3(info.dX, info.dY, info.dZ);
+
+        _gun.Shoot(position, velocity);
     }
 
     public void Destroy() {

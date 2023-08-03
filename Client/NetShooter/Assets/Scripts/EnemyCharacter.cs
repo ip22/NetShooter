@@ -29,7 +29,7 @@ public class EnemyCharacter : Character
         this.velocity = velocity;
     }
 
-    public void SetRotateX(float value) { _head.localEulerAngles = new Vector3(value, 0f, 0f); }
+    public void SetRotateX(float value) => _head.localEulerAngles = new Vector3(value, 0f, 0f);
 
-    public void SetRotateY(float value) { transform.localEulerAngles = new Vector3(0f, value, 0f); }
+    public void SetRotateY(float value) => transform.localEulerAngles = new Vector3(0f, value, 0f);
 }
