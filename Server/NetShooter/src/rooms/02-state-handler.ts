@@ -28,6 +28,9 @@ export class Player extends Schema {
 
     @type("number")
     rY = 0;
+    // *** Homework ***
+    @type("boolean")
+    sit = false;
 }
 
 export class State extends Schema {
@@ -57,6 +60,9 @@ export class State extends Schema {
             player.vZ = data.vZ;
             player.rX = data.rX;
             player.rY = data.rY;
+
+             // *** Homework ***
+            player.sit = data.sit;
     }
 }
 
@@ -74,7 +80,7 @@ export class StateHandlerRoom extends Room<State> {
         });
 
         this.onMessage("shoot", (client, data) => {
-            console.log("SHOOT StateHandlerRoom received message from", client.sessionId, ":", data);
+            // console.log("SHOOT StateHandlerRoom received message from", client.sessionId, ":", data);
             this.broadcast("Shoot", data, {except: client});
         })
     }

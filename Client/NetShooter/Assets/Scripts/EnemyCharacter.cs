@@ -18,6 +18,9 @@ public class EnemyCharacter : Character
         } else {
             transform.position = _targetPosition;
         }
+
+        if (_isSit) SitDown();
+        else StandUp();
     }
 
     public void SetSpeed(float value) => speed = value;
@@ -29,7 +32,14 @@ public class EnemyCharacter : Character
         this.velocity = velocity;
     }
 
-    public void SetRotateX(float value) => _head.localEulerAngles = new Vector3(value, 0f, 0f);
+    // *** Homework ***
+    public void SetRotateX(float value) => _head.localEulerAngles = new Vector3(Mathf.LerpAngle(_head.localEulerAngles.x, value, Time.deltaTime * 15f), 0f, 0f);
+    // public void SetRotateX(float value) => _head.localEulerAngles = new Vector3(value, 0f, 0f);
 
     public void SetRotateY(float value) => transform.localEulerAngles = new Vector3(0f, value, 0f);
+
+    // *** Homework ***
+    internal void SetIsSit(bool isSit) {
+        _isSit = isSit;
+    }
 }

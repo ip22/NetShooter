@@ -1,10 +1,10 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerCharacter : Character
 {
     [SerializeField] private Rigidbody _rigidbody;
-    //[SerializeField] private float _speed = 2f;
 
     [SerializeField] private float _jumpForce = 5f;
     [SerializeField] private CheckFly _checkFly;

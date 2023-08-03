@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e3bc6cb51adb9540a834dd2528137da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <speed>k__BackingField: 2
+  <speed>k__BackingField: 4
   _rigidbody: {fileID: 3642086834576253232}
   _jumpForce: 5
   _checkFly: {fileID: 3514976298099659669}
@@ -218,8 +218,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d47c16f240169f04fb478cf004690426, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _bulletPrefab: {fileID: 5459323238758896828, guid: ac3842854c21ed54b91f239fe53fe55a,
-    type: 3}
   _gun: {fileID: 975897512624409732}
   _animator: {fileID: 6591224479423319456}
 --- !u!1 &8855253431464270449

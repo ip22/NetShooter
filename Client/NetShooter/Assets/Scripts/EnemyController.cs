@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private EnemyGun _gun;
 
     private List<float> _recievedTimeIntervals = new List<float>() { 0f, 0f, 0f, 0f, 0f };
-    private float AvarageInterval {
+    private float avarageInterval {
         get {
             int recievedTimeIntervalsCount = _recievedTimeIntervals.Count;
             var sum = 0f;
@@ -80,12 +80,17 @@ public class EnemyController : MonoBehaviour
                 case "rY":
                     _enemyCharacter.SetRotateY((float)dataChange.Value);
                     break;
+
+                // *** Homework ***
+                case "sit":
+                    _enemyCharacter.SetIsSit((bool)dataChange.Value);
+                    break;
                 default:
                     Debug.LogWarning("Can't processed changing of field " + dataChange.Field);
                     break;
             }
         }
 
-        _enemyCharacter.SetMovement(position, velocity, AvarageInterval);
+        _enemyCharacter.SetMovement(position, velocity, avarageInterval);
     }
 }

@@ -11,7 +11,7 @@ public class Controller : MonoBehaviour
     private MultiplayerManager _multiplayerManager;
 
     private void Start() {
-        _multiplayerManager = MultiplayerManager.Instance;    
+        _multiplayerManager = MultiplayerManager.Instance;
     }
 
     void Update() {
@@ -25,6 +25,8 @@ public class Controller : MonoBehaviour
 
         var space = Input.GetKeyDown(KeyCode.Space);
 
+        var isSit = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.C) ? true : false;
+
         _player.SetInputs(h, v, mouseX * _mouseSensetivity);
         _player.RotateX(-mouseY * _mouseSensetivity);
 
@@ -32,7 +34,11 @@ public class Controller : MonoBehaviour
 
         if (isShoot && _gun.TryShoot(out ShootInfo shootInfo)) SendShoot(ref shootInfo);
 
-        SendMove();
+        // *** Homework ***
+        if (isSit) _player.SitDown(); 
+        else _player.StandUp();
+
+        SendMove(isSit);
     }
 
     private void SendShoot(ref ShootInfo shootInfo) {
@@ -42,7 +48,8 @@ public class Controller : MonoBehaviour
         _multiplayerManager.SendMessage("shoot", json);
     }
 
-    private void SendMove() {
+    // *** Homework ***
+    private void SendMove(bool isSit) {
         _player.GetMoveInfo(out Vector3 position, out Vector3 velocity, out float rotateX, out float rotateY);
 
         Dictionary<string, object> data = new Dictionary<string, object>() {
@@ -53,7 +60,8 @@ public class Controller : MonoBehaviour
             {"vY", velocity.y},
             {"vZ", velocity.z},
             {"rX", rotateX},
-            {"rY", rotateY}
+            {"rY", rotateY},
+            {"sit", isSit }
         };
 
         _multiplayerManager.SendMessage("move", data);
