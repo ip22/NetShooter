@@ -1,6 +1,6 @@
 Сглаживание поворота енеми.
 
-В EnemyCharacter использовал LerpAngle в SetRotateX.
+В EnemyCharacter использовал LerpAngle в SetRotate.
 
 Работает, как то так себе.
 

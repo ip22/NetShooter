@@ -7,7 +7,9 @@ public class CheckFly : MonoBehaviour
     [SerializeField] private LayerMask _layerMask;
     [SerializeField] private float _radius = .5f;
     [SerializeField] private float _coyoteTime = .15f;
+
     private float _flyTimer = 0;
+
     private void Update() {
         if (Physics.CheckSphere(transform.position, _radius, _layerMask)) {
             IsFly = false;
