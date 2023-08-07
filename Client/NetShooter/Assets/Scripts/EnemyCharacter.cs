@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class EnemyCharacter : Character
 {
+    [SerializeField] private Health _health;
     [SerializeField] private Transform _head;
 
     private Vector3 _targetPosition = Vector3.zero;
@@ -24,7 +25,11 @@ public class EnemyCharacter : Character
     }
 
     public void SetSpeed(float value) => speed = value;
-
+    public void SetMaxHP(int value) {
+        maxHealth = value;
+        _health.SetMax(value);
+        _health.SetCurrent(value);
+    }
     public void SetMovement(in Vector3 position, in Vector3 velocity, in float averageInterval) {
         _targetPosition = position + (velocity * averageInterval);
         _velocityMagnitude = velocity.magnitude;
@@ -32,14 +37,18 @@ public class EnemyCharacter : Character
         this.velocity = velocity;
     }
 
-    // *** Homework ***
+    public void ApplyDamage(int damage) {
+        _health.ApplyDamage(damage);
+    } 
+
+    // *** Homework 2nd week ***
     public void SetRotateX(float value) => _head.localEulerAngles = new Vector3(Mathf.LerpAngle(_head.localEulerAngles.x, value, Time.deltaTime * 15f), 0f, 0f);
     // public void SetRotateX(float value) => _head.localEulerAngles = new Vector3(value, 0f, 0f);
 
     public void SetRotateY(float value) => transform.localEulerAngles = new Vector3(0f, Mathf.LerpAngle(_head.localEulerAngles.y, value, Time.deltaTime * 15f), 0f);
     //public void SetRotateY(float value) => transform.localEulerAngles = new Vector3(0f, value, 0f);
 
-    // *** Homework ***
+    // *** Homework 2nd week***
     internal void SetIsSit(bool isSit) {
         _isSit = isSit;
     }

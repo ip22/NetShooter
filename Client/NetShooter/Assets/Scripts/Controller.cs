@@ -34,7 +34,7 @@ public class Controller : MonoBehaviour
 
         if (isShoot && _gun.TryShoot(out ShootInfo shootInfo)) SendShoot(ref shootInfo);
 
-        // *** Homework ***
+        // *** Homework 2nd week ***
         if (isSit) _player.SitDown(); 
         else _player.StandUp();
 
@@ -48,7 +48,7 @@ public class Controller : MonoBehaviour
         _multiplayerManager.SendMessage("shoot", json);
     }
 
-    // *** Homework ***
+    // *** Homework 2nd week ***
     private void SendMove(bool isSit) {
         _player.GetMoveInfo(out Vector3 position, out Vector3 velocity, out float rotateX, out float rotateY);
 
