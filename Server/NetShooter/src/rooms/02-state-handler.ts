@@ -69,7 +69,7 @@ export class State extends Schema {
             player.rX = data.rX;
             player.rY = data.rY;
 
-             // *** Homework ***
+             // *** Homework 2nd week ***
             player.sit = data.sit;
     }
 }

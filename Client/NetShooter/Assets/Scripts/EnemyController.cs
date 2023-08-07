@@ -84,11 +84,11 @@ public class EnemyController : MonoBehaviour
                     break;
 
                 case "rX":
-                    _enemyCharacter.SetRotateX((float)dataChange.Value);
+                    _enemyCharacter.SetRotateX((float)dataChange.Value, avarageInterval);
                     break;
 
                 case "rY":
-                    _enemyCharacter.SetRotateY((float)dataChange.Value);
+                    _enemyCharacter.SetRotateY((float)dataChange.Value, avarageInterval);
                     break;
 
                 // *** Homework 2nd week ***
