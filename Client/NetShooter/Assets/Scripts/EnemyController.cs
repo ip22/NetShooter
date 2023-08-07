@@ -59,6 +59,14 @@ public class EnemyController : MonoBehaviour
 
         foreach (var dataChange in changes) {
             switch (dataChange.Field) {
+                case "loss":
+                    MultiplayerManager.Instance.lossCounter.SetEnemyLoss((byte)dataChange.Value);
+                    break;
+
+                case "currentHP":
+                    if ((sbyte)dataChange.Value > (sbyte)dataChange.PreviousValue) _enemyCharacter.RestoreHP((sbyte)dataChange.Value);
+                    break;
+
                 case "pX":
                     position.x = (float)dataChange.Value;
                     break;

@@ -1,8 +1,12 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Controller : MonoBehaviour
 {
+    [SerializeField] private float _restartDelay = 3f;
     [SerializeField] private PlayerCharacter _player;
     [SerializeField] private PlayerGun _gun;
 
@@ -10,11 +14,15 @@ public class Controller : MonoBehaviour
 
     private MultiplayerManager _multiplayerManager;
 
+    private bool _hold = false;
+
     private void Start() {
         _multiplayerManager = MultiplayerManager.Instance;
     }
 
     void Update() {
+        if (_hold) return;
+
         var h = Input.GetAxisRaw("Horizontal");
         var v = Input.GetAxisRaw("Vertical");
 
@@ -27,6 +35,8 @@ public class Controller : MonoBehaviour
 
         var isSit = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.C) ? true : false;
 
+
+
         _player.SetInputs(h, v, mouseX * _mouseSensetivity);
         _player.RotateX(-mouseY * _mouseSensetivity);
 
@@ -35,8 +45,11 @@ public class Controller : MonoBehaviour
         if (isShoot && _gun.TryShoot(out ShootInfo shootInfo)) SendShoot(ref shootInfo);
 
         // *** Homework 2nd week ***
-        if (isSit) _player.SitDown(); 
+        if (isSit) _player.SitDown();
         else _player.StandUp();
+
+        // *** Homework 3rd week ***
+
 
         SendMove(isSit);
     }
@@ -61,10 +74,38 @@ public class Controller : MonoBehaviour
             {"vZ", velocity.z},
             {"rX", rotateX},
             {"rY", rotateY},
-            {"sit", isSit }
+            {"sit", isSit}
         };
 
         _multiplayerManager.SendMessage("move", data);
+    }
+
+    internal void Restart(string jsonRestartInfo) {
+        RestartInfo info = JsonUtility.FromJson<RestartInfo>(jsonRestartInfo);
+        StartCoroutine(Hold());
+
+        _player.transform.position = new Vector3(info.x, 0, info.z);
+        _player.SetInputs(0, 0, 0);
+
+        Dictionary<string, object> data = new Dictionary<string, object>() {
+            {"pX", info.x},
+            {"pY", 0},
+            {"pZ", info.z},
+            {"vX", 0f},
+            {"vY", 0f},
+            {"vZ", 0f},
+            {"rX", 0f},
+            {"rY", 0f},
+            {"sit", false}
+        };
+
+        _multiplayerManager.SendMessage("move", data);
+    }
+
+    private IEnumerator Hold() {
+        _hold = true;
+        yield return new WaitForSecondsRealtime(_restartDelay);
+        _hold = false;
     }
 }
 
@@ -78,4 +119,11 @@ public struct ShootInfo
     public float dX;
     public float dY;
     public float dZ;
+}
+
+[Serializable]
+public struct RestartInfo
+{
+    public float x;
+    public float z;
 }

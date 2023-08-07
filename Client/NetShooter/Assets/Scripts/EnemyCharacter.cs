@@ -33,20 +33,22 @@ public class EnemyCharacter : Character
     }
 
     public void SetSpeed(float value) => speed = value;
+
     public void SetMaxHP(int value) {
         maxHealth = value;
         _health.SetMax(value);
         _health.SetCurrent(value);
     }
+
+    public void RestoreHP(int newValue) {
+        _health.SetCurrent(newValue);
+    }
+
     public void SetMovement(in Vector3 position, in Vector3 velocity, in float averageInterval) {
         _targetPosition = position + (velocity * averageInterval);
         _velocityMagnitude = velocity.magnitude;
 
         this.velocity = velocity;
-    }
-
-    public void SetRotate() {
-
     }
 
     public void ApplyDamage(int damage) {
