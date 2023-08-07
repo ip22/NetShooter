@@ -22,9 +22,11 @@ public class EnemyController : MonoBehaviour
     private float _lastRecievedTime = 0f;
     private Player _player;
 
-    public void Init(Player player) {
+    public void Init(string key, Player player) {
+        _enemyCharacter.Init(key);
+
         this._player = player;
-        _enemyCharacter.SetMaxHP(player.hp);
+        _enemyCharacter.SetMaxHP(player.maxHP);
         _enemyCharacter.SetSpeed(player.speed);
         player.OnChange += OnChange;
     }
@@ -60,32 +62,40 @@ public class EnemyController : MonoBehaviour
                 case "pX":
                     position.x = (float)dataChange.Value;
                     break;
+
                 case "pY":
                     position.y = (float)dataChange.Value;
                     break;
+
                 case "pZ":
                     position.z = (float)dataChange.Value;
                     break;
+
                 case "vX":
                     velocity.x = (float)dataChange.Value;
                     break;
+
                 case "vY":
                     velocity.y = (float)dataChange.Value;
                     break;
+
                 case "vZ":
                     velocity.z = (float)dataChange.Value;
                     break;
+
                 case "rX":
                     _enemyCharacter.SetRotateX((float)dataChange.Value);
                     break;
+
                 case "rY":
                     _enemyCharacter.SetRotateY((float)dataChange.Value);
                     break;
 
-                // *** Homework ***
+                // *** Homework 2nd week ***
                 case "sit":
                     _enemyCharacter.SetIsSit((bool)dataChange.Value);
                     break;
+
                 default:
                     Debug.LogWarning("Can't processed changing of field " + dataChange.Field);
                     break;

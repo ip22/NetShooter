@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyCharacter : Character
@@ -7,6 +8,12 @@ public class EnemyCharacter : Character
 
     private Vector3 _targetPosition = Vector3.zero;
     private float _velocityMagnitude = 0f;
+
+    private string _sessionID;
+
+    public void Init(string sessionID) {
+        _sessionID = sessionID;
+    }
 
     private void Start() {
         _targetPosition = transform.position;
@@ -20,6 +27,7 @@ public class EnemyCharacter : Character
             transform.position = _targetPosition;
         }
 
+        // *** Homework 2nd week ***
         if (_isSit) SitDown();
         else StandUp();
     }
@@ -39,7 +47,14 @@ public class EnemyCharacter : Character
 
     public void ApplyDamage(int damage) {
         _health.ApplyDamage(damage);
-    } 
+
+        Dictionary<string, object> data = new Dictionary<string, object>() {
+            {"id", _sessionID },
+            { "value", damage }
+        };
+
+        MultiplayerManager.Instance.SendMessage("damage", data);
+    }
 
     // *** Homework 2nd week ***
     public void SetRotateX(float value) => _head.localEulerAngles = new Vector3(Mathf.LerpAngle(_head.localEulerAngles.x, value, Time.deltaTime * 15f), 0f, 0f);
