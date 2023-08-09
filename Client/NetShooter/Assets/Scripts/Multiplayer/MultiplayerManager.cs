@@ -36,13 +36,13 @@ public class MultiplayerManager : ColyseusManager<MultiplayerManager>
     }
 
     private void SetGun(string jsonGunInfo) {
-        GunInfo shootInfo = JsonUtility.FromJson<GunInfo>(jsonGunInfo);
-        if (_enemies.ContainsKey(shootInfo.id) == false) {
+        GunInfo gunInfo = JsonUtility.FromJson<GunInfo>(jsonGunInfo);
+        if (_enemies.ContainsKey(gunInfo.id) == false) {
             Debug.LogError("Enemy trying to set gun, but he's not exists.");
             return;
         }
 
-        _enemies[shootInfo.id].SetGun(shootInfo);
+        _enemies[gunInfo.id].SetGun(gunInfo);
     }
 
     private void ApplyShoot(string jsonShootInfo) {

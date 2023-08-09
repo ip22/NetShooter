@@ -32,6 +32,10 @@ public class EnemyController : MonoBehaviour
         this._player = player;
         _enemyCharacter.SetMaxHP(player.maxHP);
         _enemyCharacter.SetSpeed(player.speed);
+
+        // *** Homework 3nd week ***
+        _ui.IndicateGun(_gun.gunIndex);
+
         player.OnChange += OnChange;
     }
     //internal void SetGun(ShootInfo gunInfo) {
