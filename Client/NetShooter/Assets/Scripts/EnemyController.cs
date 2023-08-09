@@ -8,7 +8,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField] private EnemyCharacter _enemyCharacter;
     [SerializeField] private EnemyGun _gun;
 
-    // *** Homework 3nd week ***
+    // *** Homework 3rd week ***
     [SerializeField] private EnemyGunUI _ui;
 
     private List<float> _recievedTimeIntervals = new List<float>() { 0f, 0f, 0f, 0f, 0f };
@@ -29,11 +29,11 @@ public class EnemyController : MonoBehaviour
     public void Init(string key, Player player) {
         _enemyCharacter.Init(key);
 
-        this._player = player;
+        _player = player;
         _enemyCharacter.SetMaxHP(player.maxHP);
         _enemyCharacter.SetSpeed(player.speed);
 
-        // *** Homework 3nd week ***
+        // *** Homework 3rd week ***
         _ui.IndicateGun(_gun.gunIndex);
 
         player.OnChange += OnChange;
@@ -100,13 +100,13 @@ public class EnemyController : MonoBehaviour
                     break;
 
                 case "rX":
-                    _enemyCharacter.SetRotateX((float)dataChange.Value, avarageInterval);
-                    //_enemyCharacter.SetRotateX((float)dataChange.Value);
+                    //_enemyCharacter.SetRotateX((float)dataChange.Value, avarageInterval);
+                    _enemyCharacter.SetRotateX((float)dataChange.Value);
                     break;
 
                 case "rY":
-                    _enemyCharacter.SetRotateY((float)dataChange.Value, avarageInterval);
-                    //_enemyCharacter.SetRotateY((float)dataChange.Value);
+                    //_enemyCharacter.SetRotateY((float)dataChange.Value, avarageInterval);
+                    _enemyCharacter.SetRotateY((float)dataChange.Value);
                     break;
 
                 // *** Homework 2nd week ***
@@ -123,7 +123,7 @@ public class EnemyController : MonoBehaviour
         _enemyCharacter.SetMovement(position, velocity, avarageInterval);
     }
 
-    // *** Homework 3nd week ***
+    // *** Homework 3rd week ***
     internal void SetGun(GunInfo gunInfo) {
         _gun.gunIndex = gunInfo.index;
         _ui.IndicateGun(_gun.gunIndex);
