@@ -1,6 +1,13 @@
 import { Room, Client } from "colyseus";
 import { Schema, type, MapSchema } from "@colyseus/schema";
 
+// *** Homework 3nd week ***
+//export class Spawner extends Schema {
+//    @type("number")
+//    x = 0;
+//    y = 0;
+//}
+
 export class Player extends Schema {
     @type("uint8")
     loss = 0;
@@ -94,7 +101,7 @@ export class StateHandlerRoom extends Room<State> {
         this.onMessage("shoot", (client, data) => {
             // console.log("SHOOT StateHandlerRoom received message from", client.sessionId, ":", data);
             this.broadcast("Shoot", data, {except: client});
-        })
+        });
 
         this.onMessage("damage", (client, data) => {
             const clientID = data.id;
@@ -121,12 +128,12 @@ export class StateHandlerRoom extends Room<State> {
 
                 this.clients[i].send("Restart", message);
             }
-        })
+        });
 
         // *** Homework 3nd week ***
         this.onMessage("gun", (client, data) => {
             this.broadcast("Gun", data, {except: client});           
-        })
+        });
     }
 
     onAuth(client, options, req) {

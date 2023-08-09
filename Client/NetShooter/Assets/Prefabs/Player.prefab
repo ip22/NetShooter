@@ -72,7 +72,7 @@ Transform:
   - {fileID: 421812640791669713}
   - {fileID: 3654719975480515273}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9100186537182895182
 MonoBehaviour:
@@ -212,9 +212,6 @@ MonoBehaviour:
   _bulletPrefab: {fileID: 5459323238758896828, guid: ac3842854c21ed54b91f239fe53fe55a,
     type: 3}
   _bulletPoint: {fileID: 285922251673393442}
-  _damage: 1
-  _bulletSpeed: 10
-  _shootDelay: 0.2
 --- !u!114 &51065664021836121
 MonoBehaviour:
   m_ObjectHideFlags: 0

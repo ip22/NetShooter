@@ -63,10 +63,14 @@ public class EnemyCharacter : Character
     }
 
     // *** Homework 2nd week ***
-    public void SetRotateX(float value, float avarageInterval) => _head.localEulerAngles = new Vector3(Mathf.LerpAngle(_head.localEulerAngles.x, value, Time.deltaTime * 30f * avarageInterval), 0f, 0f);
-    // public void SetRotateX(float value) => _head.localEulerAngles = new Vector3(value, 0f, 0f);
+    public void SetRotateX(float value, float avarageInterval) =>
+        _head.localEulerAngles = new Vector3(Mathf.Lerp(_head.localEulerAngles.x, value, Time.deltaTime * 30f * avarageInterval), 0f, 0f);
 
-    public void SetRotateY(float value, float avarageInterval) => transform.localEulerAngles = new Vector3(0f, Mathf.LerpAngle(_head.localEulerAngles.y, value, Time.deltaTime * 30f * avarageInterval), 0f);
+    //public void SetRotateX(float value) => _head.localEulerAngles = new Vector3(value, 0f, 0f);
+
+    public void SetRotateY(float value, float avarageInterval) =>
+        transform.localEulerAngles = new Vector3(0f, Mathf.Lerp(transform.localEulerAngles.y, value, Time.deltaTime * 30f * avarageInterval), 0f);
+
     //public void SetRotateY(float value) => transform.localEulerAngles = new Vector3(0f, value, 0f);
 
     // *** Homework 2nd week***

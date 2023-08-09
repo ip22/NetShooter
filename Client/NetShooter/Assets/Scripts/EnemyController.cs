@@ -38,9 +38,6 @@ public class EnemyController : MonoBehaviour
 
         player.OnChange += OnChange;
     }
-    //internal void SetGun(ShootInfo gunInfo) {
-    //    throw new NotImplementedException();
-    //}
 
     public void Shoot(in ShootInfo info) {
         Vector3 position = new Vector3(info.pX, info.pY, info.pZ);
@@ -104,10 +101,12 @@ public class EnemyController : MonoBehaviour
 
                 case "rX":
                     _enemyCharacter.SetRotateX((float)dataChange.Value, avarageInterval);
+                    //_enemyCharacter.SetRotateX((float)dataChange.Value);
                     break;
 
                 case "rY":
                     _enemyCharacter.SetRotateY((float)dataChange.Value, avarageInterval);
+                    //_enemyCharacter.SetRotateY((float)dataChange.Value);
                     break;
 
                 // *** Homework 2nd week ***

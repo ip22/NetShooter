@@ -38,7 +38,7 @@ public class Controller : MonoBehaviour
         // *** Homework 2nd week ***
         var isSit = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.C) ? true : false;
 
-        // *** Homework 3nd week ***
+        // *** Homework 3rd week ***
         var nextGun = Input.GetKeyDown(KeyCode.E);
         var prevGun = Input.GetKeyDown(KeyCode.Q);
 
@@ -105,7 +105,7 @@ public class Controller : MonoBehaviour
         _multiplayerManager.SendMessage("move", data);
     }
 
-    internal void Restart(string jsonRestartInfo) {
+    public void Restart(string jsonRestartInfo) {
         RestartInfo info = JsonUtility.FromJson<RestartInfo>(jsonRestartInfo);
         StartCoroutine(Hold());
 
@@ -121,6 +121,8 @@ public class Controller : MonoBehaviour
             {"vZ", 0f},
             {"rX", 0f},
             {"rY", 0f},
+
+            // *** Homework 2nd week ***
             {"sit", false}
         };
 
@@ -153,6 +155,7 @@ public struct RestartInfo
     public float z;
 }
 
+// *** Homework 3rd week ***
 [Serializable]
 public struct GunInfo
 {

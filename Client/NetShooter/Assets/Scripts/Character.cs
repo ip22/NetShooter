@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Character : MonoBehaviour
@@ -11,11 +9,7 @@ public abstract class Character : MonoBehaviour
     // *** Homework 2nd week***
     protected bool _isSit;
 
-    public void SitDown() {
-        transform.localScale = new Vector3(transform.localScale.x, .5f, transform.localScale.z);
-    }
+    public void SitDown() => transform.localScale = new Vector3(transform.localScale.x, .5f, transform.localScale.z);
 
-    public void StandUp() {
-        transform.localScale = new Vector3(transform.localScale.x, 1f, transform.localScale.z);
-    }
+    public void StandUp() => transform.localScale = new Vector3(transform.localScale.x, 1f, transform.localScale.z);
 }
