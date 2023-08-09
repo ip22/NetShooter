@@ -30,6 +30,19 @@ public class MultiplayerManager : ColyseusManager<MultiplayerManager>
         _room.OnStateChange += OnChange;
 
         _room.OnMessage<string>("Shoot", ApplyShoot);
+
+        // *** Homework 3nd week ***
+        _room.OnMessage<string>("Gun", SetGun);
+    }
+
+    private void SetGun(string jsonGunInfo) {
+        GunInfo shootInfo = JsonUtility.FromJson<GunInfo>(jsonGunInfo);
+        if (_enemies.ContainsKey(shootInfo.id) == false) {
+            Debug.LogError("Enemy trying to set gun, but he's not exists.");
+            return;
+        }
+
+        _enemies[shootInfo.id].SetGun(shootInfo);
     }
 
     private void ApplyShoot(string jsonShootInfo) {

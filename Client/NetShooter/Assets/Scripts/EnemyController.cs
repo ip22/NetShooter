@@ -1,4 +1,5 @@
 using Colyseus.Schema;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,6 +7,9 @@ public class EnemyController : MonoBehaviour
 {
     [SerializeField] private EnemyCharacter _enemyCharacter;
     [SerializeField] private EnemyGun _gun;
+
+    // *** Homework 3nd week ***
+    [SerializeField] private EnemyGunUI _ui;
 
     private List<float> _recievedTimeIntervals = new List<float>() { 0f, 0f, 0f, 0f, 0f };
     private float avarageInterval {
@@ -30,6 +34,9 @@ public class EnemyController : MonoBehaviour
         _enemyCharacter.SetSpeed(player.speed);
         player.OnChange += OnChange;
     }
+    //internal void SetGun(ShootInfo gunInfo) {
+    //    throw new NotImplementedException();
+    //}
 
     public void Shoot(in ShootInfo info) {
         Vector3 position = new Vector3(info.pX, info.pY, info.pZ);
@@ -111,5 +118,11 @@ public class EnemyController : MonoBehaviour
         }
 
         _enemyCharacter.SetMovement(position, velocity, avarageInterval);
+    }
+
+    // *** Homework 3nd week ***
+    internal void SetGun(GunInfo gunInfo) {
+        _gun.gunIndex = gunInfo.index;
+        _ui.IndicateGun(_gun.gunIndex);
     }
 }

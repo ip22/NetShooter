@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Controller : MonoBehaviour
 {
+    // *** Homework 3nd week ***
+    [SerializeField] private Armory _armory;
+
     [SerializeField] private float _restartDelay = 3f;
     [SerializeField] private PlayerCharacter _player;
     [SerializeField] private PlayerGun _gun;
@@ -33,9 +35,12 @@ public class Controller : MonoBehaviour
 
         var space = Input.GetKeyDown(KeyCode.Space);
 
+        // *** Homework 2nd week ***
         var isSit = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.C) ? true : false;
 
-
+        // *** Homework 3nd week ***
+        var nextGun = Input.GetKeyDown(KeyCode.E);
+        var prevGun = Input.GetKeyDown(KeyCode.Q);
 
         _player.SetInputs(h, v, mouseX * _mouseSensetivity);
         _player.RotateX(-mouseY * _mouseSensetivity);
@@ -49,7 +54,15 @@ public class Controller : MonoBehaviour
         else _player.StandUp();
 
         // *** Homework 3rd week ***
+        if (nextGun) {
+            _armory.NextGun();
+            SendGunChange(_armory.PlayerGunIndex());
+        }
 
+        if (prevGun) {
+            _armory.PrevGun();
+            SendGunChange(_armory.PlayerGunIndex());
+        }
 
         SendMove(isSit);
     }
@@ -59,6 +72,16 @@ public class Controller : MonoBehaviour
         var json = JsonUtility.ToJson(shootInfo);
 
         _multiplayerManager.SendMessage("shoot", json);
+    }
+
+    // *** Homework 3rd week ***
+    private void SendGunChange(byte index) {
+        GunInfo gun = new GunInfo();
+        gun.id = _multiplayerManager.GetSessionID();
+        gun.index = index;
+
+        var json = JsonUtility.ToJson(gun);
+        _multiplayerManager.SendMessage("gun", json);
     }
 
     // *** Homework 2nd week ***
@@ -74,6 +97,8 @@ public class Controller : MonoBehaviour
             {"vZ", velocity.z},
             {"rX", rotateX},
             {"rY", rotateY},
+
+            // *** Homework 2nd week ***
             {"sit", isSit}
         };
 
@@ -126,4 +151,11 @@ public struct RestartInfo
 {
     public float x;
     public float z;
+}
+
+[Serializable]
+public struct GunInfo
+{
+    public string id;
+    public byte index;
 }

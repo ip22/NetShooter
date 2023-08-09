@@ -73,7 +73,7 @@ export class State extends Schema {
             player.rX = data.rX;
             player.rY = data.rY;
 
-             // *** Homework 2nd week ***
+            // *** Homework 2nd week ***
             player.sit = data.sit;
     }
 }
@@ -123,8 +123,9 @@ export class StateHandlerRoom extends Room<State> {
             }
         })
 
+        // *** Homework 3nd week ***
         this.onMessage("gun", (client, data) => {
-
+            this.broadcast("Gun", data, {except: client});           
         })
     }
 
