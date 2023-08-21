@@ -770,12 +770,13 @@ GameObject:
   m_Component:
   - component: {fileID: 1084671678}
   - component: {fileID: 1084671679}
+  - component: {fileID: 1084671680}
   m_Layer: 0
   m_Name: Multiplayer Manager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1084671678
 Transform:
@@ -805,10 +806,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _colyseusSettings: {fileID: 11400000, guid: 3df8a0c7a0755d2438f749be7c2bf14a, type: 2}
+  skins: {fileID: 1084671680}
   <lossCounter>k__BackingField: {fileID: 1964602098}
   <spawnPoints>k__BackingField: {fileID: 1341229162}
-  _player: {fileID: 2923816929949297592, guid: b74a8e4d2b4b52e45bb3ef270e5f8dc3, type: 3}
-  _enemy: {fileID: 8156562863946662603, guid: 0d322eb50ee606242a1990424f8b62bb, type: 3}
+  _player: {fileID: 4113850451874522932, guid: b74a8e4d2b4b52e45bb3ef270e5f8dc3, type: 3}
+  _enemy: {fileID: 8829457325181038465, guid: 0d322eb50ee606242a1990424f8b62bb, type: 3}
+--- !u!114 &1084671680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1084671677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7cd7de9f18ca34438df810b5ee4a14c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _materials:
+  - {fileID: 2100000, guid: 6ad36ec924f75944bb00d6b8f6c685e8, type: 2}
+  - {fileID: 2100000, guid: 92bbfa5f9bee13e4f933256424f8a409, type: 2}
+  - {fileID: 2100000, guid: 2ce4a1b7d08554b4a9e0021b82fbc6aa, type: 2}
+  - {fileID: 2100000, guid: 75936a849f7e5764f94a5fc8a139de87, type: 2}
+  - {fileID: 2100000, guid: 3f9a400ef8f26ca48a08abd7c857b2e1, type: 2}
 --- !u!1 &1154477464
 GameObject:
   m_ObjectHideFlags: 0
@@ -1606,12 +1626,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3231276491154292549, guid: b74a8e4d2b4b52e45bb3ef270e5f8dc3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3387004489638366258, guid: b74a8e4d2b4b52e45bb3ef270e5f8dc3,
         type: 3}
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 3387004489638366258, guid: b74a8e4d2b4b52e45bb3ef270e5f8dc3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3953501298176148500, guid: b74a8e4d2b4b52e45bb3ef270e5f8dc3,
         type: 3}
       propertyPath: m_IsActive
       value: 0

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class MultiplayerManager : ColyseusManager<MultiplayerManager>
 {
+    [field: SerializeField] public Skins skins;
     [field: SerializeField] public LossCounter lossCounter { get; private set; }
     [field: SerializeField] public SpawnPoints spawnPoints { get; private set; }
 
@@ -23,6 +24,7 @@ public class MultiplayerManager : ColyseusManager<MultiplayerManager>
         spawnPoints.GetPoint(Random.Range(0, spawnPoints.length), out Vector3 spawnPosition, out Vector3 spawnRotation);
 
         Dictionary<string, object> data = new Dictionary<string, object>() {
+            {"skins", skins.length },
             {"points", spawnPoints.length },
             {"hp", _player.maxHealth},
             {"speed", _player.speed},
@@ -83,6 +85,8 @@ public class MultiplayerManager : ColyseusManager<MultiplayerManager>
         player.OnChange += playerCharacter.OnChange;
 
         _room.OnMessage<int>("Restart", playerCharacter.GetComponent<Controller>().Restart);
+
+        playerCharacter.GetComponent<SetSkin>().Set(skins.GetMaterial(player.skin));
     }
 
     private void CreateEnemy(string key, Player player) {
@@ -90,6 +94,7 @@ public class MultiplayerManager : ColyseusManager<MultiplayerManager>
 
         var enemy = Instantiate(_enemy, position, Quaternion.identity);
         enemy.Init(key, player);
+        enemy.GetComponent<SetSkin>().Set(skins.GetMaterial(player.skin));
 
         _enemies.Add(key, enemy);
 
