@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// тест ветки
+
 public class EnemyCharacter : Character
 {
     [SerializeField] private Health _health;
