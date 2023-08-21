@@ -27,7 +27,6 @@ public class EnemyCharacter : Character
             transform.position = _targetPosition;
         }
 
-        // *** Homework 2nd week ***
         if (_isSit) SitDown();
         else StandUp();
     }
@@ -62,18 +61,13 @@ public class EnemyCharacter : Character
         MultiplayerManager.Instance.SendMessage("damage", data);
     }
 
-    // *** Homework 2nd week ***
-    //public void SetRotateX(float value, float avarageInterval) =>
-    //    _head.localEulerAngles = new Vector3(Mathf.LerpAngle(_head.localEulerAngles.x, value, Time.deltaTime * 30f * avarageInterval), 0f, 0f);
+    public void SetRotateX(float value) =>
+        _head.localEulerAngles = new Vector3(Mathf.LerpAngle(_head.localEulerAngles.x, value, Time.deltaTime * 30f), 0f, 0f);
 
-    public void SetRotateX(float value) => _head.localEulerAngles = new Vector3(value, 0f, 0f);
 
-    //public void SetRotateY(float value, float avarageInterval) =>
-    //    transform.localEulerAngles = new Vector3(0f, Mathf.LerpAngle(transform.localEulerAngles.y, value, Time.deltaTime * 30f * avarageInterval), 0f);
+    public void SetRotateY(float value) =>
+        transform.localEulerAngles = new Vector3(0f, Mathf.LerpAngle(transform.localEulerAngles.y, value, Time.deltaTime * 30f), 0f);
 
-    public void SetRotateY(float value) => transform.localEulerAngles = new Vector3(0f, value, 0f);
-
-    // *** Homework 2nd week***
     internal void SetIsSit(bool isSit) {
         _isSit = isSit;
     }

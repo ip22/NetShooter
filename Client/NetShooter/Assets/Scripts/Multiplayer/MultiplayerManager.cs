@@ -1,7 +1,6 @@
 using Colyseus;
 using UnityEngine;
 using System.Collections.Generic;
-using System;
 
 public class MultiplayerManager : ColyseusManager<MultiplayerManager>
 {
@@ -31,7 +30,6 @@ public class MultiplayerManager : ColyseusManager<MultiplayerManager>
 
         _room.OnMessage<string>("Shoot", ApplyShoot);
 
-        // *** Homework 3nd week ***
         _room.OnMessage<string>("Gun", SetGun);
     }
 

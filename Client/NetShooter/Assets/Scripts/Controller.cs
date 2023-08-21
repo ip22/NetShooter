@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Controller : MonoBehaviour
 {
-    // *** Homework 3nd week ***
     [SerializeField] private Armory _armory;
 
     [SerializeField] private float _restartDelay = 3f;
@@ -35,10 +34,8 @@ public class Controller : MonoBehaviour
 
         var space = Input.GetKeyDown(KeyCode.Space);
 
-        // *** Homework 2nd week ***
         var isSit = Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.C) ? true : false;
 
-        // *** Homework 3rd week ***
         var nextGun = Input.GetKeyDown(KeyCode.E);
         var prevGun = Input.GetKeyDown(KeyCode.Q);
 
@@ -49,11 +46,9 @@ public class Controller : MonoBehaviour
 
         if (isShoot && _gun.TryShoot(out ShootInfo shootInfo)) SendShoot(ref shootInfo);
 
-        // *** Homework 2nd week ***
         if (isSit) _player.SitDown();
         else _player.StandUp();
 
-        // *** Homework 3rd week ***
         if (nextGun) {
             _armory.NextGun();
             SendGunChange(_armory.PlayerGunIndex());
@@ -74,7 +69,6 @@ public class Controller : MonoBehaviour
         _multiplayerManager.SendMessage("shoot", json);
     }
 
-    // *** Homework 3rd week ***
     private void SendGunChange(byte index) {
         GunInfo gun = new GunInfo();
         gun.id = _multiplayerManager.GetSessionID();
@@ -84,7 +78,6 @@ public class Controller : MonoBehaviour
         _multiplayerManager.SendMessage("gun", json);
     }
 
-    // *** Homework 2nd week ***
     private void SendMove(bool isSit) {
         _player.GetMoveInfo(out Vector3 position, out Vector3 velocity, out float rotateX, out float rotateY);
 
@@ -97,8 +90,6 @@ public class Controller : MonoBehaviour
             {"vZ", velocity.z},
             {"rX", rotateX},
             {"rY", rotateY},
-
-            // *** Homework 2nd week ***
             {"sit", isSit}
         };
 
@@ -121,8 +112,6 @@ public class Controller : MonoBehaviour
             {"vZ", 0f},
             {"rX", 0f},
             {"rY", 0f},
-
-            // *** Homework 2nd week ***
             {"sit", false}
         };
 
@@ -155,7 +144,6 @@ public struct RestartInfo
     public float z;
 }
 
-// *** Homework 3rd week ***
 [Serializable]
 public struct GunInfo
 {
