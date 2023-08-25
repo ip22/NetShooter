@@ -115,6 +115,7 @@ export class StateHandlerRoom extends Room<State> {
         for(var i = 1; i < options.skins; i++){
             this.skins.push(i);
         }
+
         this.mixArray(this.skins);
 
         this.spawnPointCount = options.points
@@ -136,9 +137,11 @@ export class StateHandlerRoom extends Room<State> {
         this.onMessage("damage", (client, data) => {
             const clientID = data.id;
             const player = this.state.players.get(clientID); 
-            
-            let hp = player.currentHP - data.value;
-            player.currentHP -= data.value;
+                       
+            let damage = data.value;
+
+            let hp = player.currentHP - damage;
+            player.currentHP -= damage;
 
             if(hp > 0){
                 player.currentHP = hp;

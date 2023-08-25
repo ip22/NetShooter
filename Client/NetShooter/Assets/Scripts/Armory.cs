@@ -14,10 +14,10 @@ public class Armory : MonoBehaviour
     }
 
     private void FillArmory() {
-        _guns.Add(new PlayerGun(0, 1, 10f, .2f));
-        _guns.Add(new PlayerGun(1, 2, 15f, .15f));
-        _guns.Add(new PlayerGun(2, 3, 20f, .1f));
-        _guns.Add(new PlayerGun(3, 4, 25f, .05f));
+        _guns.Add(new PlayerGun(0, 1, 20f, .2f));
+        _guns.Add(new PlayerGun(1, 2, 25f, .15f));
+        _guns.Add(new PlayerGun(2, 3, 30f, .1f));
+        _guns.Add(new PlayerGun(3, 4, 35f, .05f));
     }
 
     private int SwitchGun(int index, bool next) {

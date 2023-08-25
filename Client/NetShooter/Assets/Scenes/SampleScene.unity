@@ -810,7 +810,7 @@ MonoBehaviour:
   <lossCounter>k__BackingField: {fileID: 1964602098}
   <spawnPoints>k__BackingField: {fileID: 1341229162}
   _player: {fileID: 4113850451874522932, guid: b74a8e4d2b4b52e45bb3ef270e5f8dc3, type: 3}
-  _enemy: {fileID: 8829457325181038465, guid: 0d322eb50ee606242a1990424f8b62bb, type: 3}
+  _enemy: {fileID: 1759145654113844897, guid: 0d322eb50ee606242a1990424f8b62bb, type: 3}
 --- !u!114 &1084671680
 MonoBehaviour:
   m_ObjectHideFlags: 0

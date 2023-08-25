@@ -6,6 +6,9 @@ public class EnemyCharacter : Character
     [SerializeField] private Health _health;
     [SerializeField] private Transform _head;
 
+    [SerializeField] private GameObject _shotFXPrefab;
+    [SerializeField] private GameObject _headShotFXPrefab;
+
     private Vector3 _targetPosition = Vector3.zero;
     private float _velocityMagnitude = 0f;
 
@@ -50,20 +53,39 @@ public class EnemyCharacter : Character
         this.velocity = velocity;
     }
 
-    public void ApplyDamage(int damage) {
+    public void ApplyDamage(int damage, BulletHit bulletHit, ContactPoint point) {
+        damage *= (int)bulletHit;
         _health.ApplyDamage(damage);
+        ShotFX(bulletHit, point);
+        SendDamage(damage);
+    }
 
+    private void SendDamage(int damage) {
         Dictionary<string, object> data = new Dictionary<string, object>() {
             {"id", _sessionID },
-            { "value", damage }
+            {"value", damage }
         };
 
         MultiplayerManager.Instance.SendMessage("damage", data);
     }
 
+    // TODO broadcast FX to all clients
+    private void ShotFX(BulletHit bulletHit, ContactPoint point) {
+        switch (bulletHit) {
+            case BulletHit.Body:
+                Instantiate(_shotFXPrefab, point.point, Quaternion.FromToRotation(Vector3.up, point.normal));
+                break;
+            case BulletHit.Head:
+                Instantiate(_headShotFXPrefab, point.point, Quaternion.FromToRotation(Vector3.up, point.normal));
+                break;
+            default:
+                break;
+        }
+
+    }
+
     public void SetRotateX(float value) =>
         _head.localEulerAngles = new Vector3(Mathf.LerpAngle(_head.localEulerAngles.x, value, Time.deltaTime * 30f), 0f, 0f);
-
 
     public void SetRotateY(float value) =>
         transform.localEulerAngles = new Vector3(0f, Mathf.LerpAngle(transform.localEulerAngles.y, value, Time.deltaTime * 30f), 0f);

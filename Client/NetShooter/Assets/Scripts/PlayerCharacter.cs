@@ -26,13 +26,17 @@ public class PlayerCharacter : Character
     private float _jumpTime;
 
     private void Start() {
+        SetCamera();
+
+        _health.SetMax(maxHealth);
+        _health.SetCurrent(maxHealth);
+    }
+
+    private void SetCamera() {
         var camera = Camera.main.transform;
         camera.parent = _cameraPoint;
         camera.localPosition = Vector3.zero;
         camera.localRotation = Quaternion.identity;
-
-        _health.SetMax(maxHealth);
-        _health.SetCurrent(maxHealth);
     }
 
     public void SetInputs(float inputH, float inputV, float rotateY) {
